@@ -8,6 +8,7 @@ import countries from './data/countries.json'
 import usStates from './data/usStates.json'
 
 // Map abbreviated TopoJSON names to countries.json common names
+// (TopoJSON name -> our data name)
 const MAP_NAME_FIXES = {
   'W. Sahara': 'Western Sahara',
   'Dem. Rep. Congo': 'DR Congo',
@@ -21,6 +22,9 @@ const MAP_NAME_FIXES = {
   'Bosnia and Herz.': 'Bosnia and Herzegovina',
   'Macedonia': 'North Macedonia',
   'S. Sudan': 'South Sudan',
+  'United States of America': 'United States',
+  'Côte d\'Ivoire': 'Ivory Coast',
+  'Congo': 'Republic of the Congo',
 }
 
 function App() {
@@ -42,7 +46,12 @@ function App() {
     )
     if (!country) return
 
-    const entry = { ...country, mapName: nameOrCode }
+    // Resolve the TopoJSON map name for highlighting
+    const reverseFixes = Object.fromEntries(
+      Object.entries(MAP_NAME_FIXES).map(([k, v]) => [v, k])
+    )
+    const mapName = reverseFixes[country.name.common] || country.name.common
+    const entry = { ...country, mapName }
     setSelected(entry)
     setPanelOpen(true)
     setRecentlyViewed((prev) => {
