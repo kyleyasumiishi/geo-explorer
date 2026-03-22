@@ -26,6 +26,7 @@ function App() {
   const [mapMode, setMapMode] = useState('world')
   const [selected, setSelected] = useState(null)
   const [recentlyViewed, setRecentlyViewed] = useState([])
+  const [panelOpen, setPanelOpen] = useState(false)
 
   function handleSelectCountry(nameOrCode) {
     const resolved = MAP_NAME_FIXES[nameOrCode] || nameOrCode
@@ -40,6 +41,7 @@ function App() {
 
     const entry = { ...country, mapName: nameOrCode }
     setSelected(entry)
+    setPanelOpen(true)
     setRecentlyViewed((prev) => {
       const filtered = prev.filter((c) => c.cca3 !== country.cca3)
       return [entry, ...filtered].slice(0, 5)
@@ -51,6 +53,7 @@ function App() {
     if (!state) return
 
     setSelected(state)
+    setPanelOpen(true)
     setRecentlyViewed((prev) => {
       const filtered = prev.filter((s) => s.abbreviation !== state.abbreviation)
       return [state, ...filtered].slice(0, 5)
@@ -65,9 +68,9 @@ function App() {
 
   return (
     <div className="h-screen bg-gray-900 text-white flex flex-col">
-      <header className="p-4 flex items-center gap-4 shrink-0">
+      <header className="p-3 md:p-4 flex flex-wrap items-center gap-3 md:gap-4 shrink-0">
         <h1
-          className="text-3xl font-bold cursor-pointer hover:text-amber-400 transition-colors"
+          className="text-2xl md:text-3xl font-bold cursor-pointer hover:text-amber-400 transition-colors"
           onClick={() => setSelected(null)}
           title="Reset map view"
         >
@@ -95,23 +98,41 @@ function App() {
             USA
           </button>
         </div>
-        {mapMode === 'world' && <SearchBar onSelect={handleSelectCountry} />}
+        {mapMode === 'world' && (
+          <div className="w-full md:w-auto md:flex-1">
+            <SearchBar onSelect={handleSelectCountry} />
+          </div>
+        )}
       </header>
-      <div className="flex flex-1 min-h-0">
-        <main className="flex-1">
+      <div className="flex flex-col md:flex-row flex-1 min-h-0">
+        <main className="flex-1 min-h-[40vh] md:min-h-0">
           {mapMode === 'world' ? (
             <WorldMap selected={selected} onSelect={handleSelectCountry} />
           ) : (
             <USAMap selected={selected} onSelect={handleSelectState} />
           )}
         </main>
-        <aside className="w-80 bg-gray-800 border-l border-gray-700 shrink-0">
-          <InfoPanel
-            selected={selected}
-            recentlyViewed={recentlyViewed}
-            onSelect={mapMode === 'world' ? handleSelectCountry : handleSelectState}
-            mapMode={mapMode}
-          />
+        <aside className="w-full md:w-80 bg-gray-800 border-t md:border-t-0 md:border-l border-gray-700 shrink-0 md:max-h-none md:overflow-y-auto">
+          {/* Mobile: collapsible bar */}
+          <button
+            onClick={() => setPanelOpen(!panelOpen)}
+            className="md:hidden w-full px-4 py-3 flex items-center justify-between text-sm font-medium"
+          >
+            <span className="text-amber-400">
+              {selected
+                ? selected.name?.common || selected.name
+                : 'No selection'}
+            </span>
+            <span className="text-gray-400">{panelOpen ? '▼' : '▲'}</span>
+          </button>
+          <div className={`${panelOpen ? 'max-h-[50vh]' : 'max-h-0'} md:max-h-none overflow-y-auto transition-all duration-300`}>
+            <InfoPanel
+              selected={selected}
+              recentlyViewed={recentlyViewed}
+              onSelect={mapMode === 'world' ? handleSelectCountry : handleSelectState}
+              mapMode={mapMode}
+            />
+          </div>
         </aside>
       </div>
     </div>

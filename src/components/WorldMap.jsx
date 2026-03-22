@@ -10,14 +10,16 @@ const GEO_URL = 'https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json'
 
 export default function WorldMap({ selected, onSelect }) {
   const [hovered, setHovered] = useState(null)
+  const center = selected ? [selected.latlng[1], selected.latlng[0]] : [0, 0]
+  const zoom = selected ? 4 : 1
 
   return (
     <ComposableMap
-      projection="geoMercator"
-      projectionConfig={{ scale: 130, center: [0, 30] }}
+      projection="geoEqualEarth"
+      projectionConfig={{ scale: 160 }}
       className="w-full h-full"
     >
-      <ZoomableGroup>
+      <ZoomableGroup center={center} zoom={zoom}>
         <Geographies geography={GEO_URL}>
           {({ geographies }) =>
             geographies.map((geo) => {
