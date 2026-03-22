@@ -27,6 +27,7 @@ function App() {
   const [selected, setSelected] = useState(null)
   const [recentlyViewed, setRecentlyViewed] = useState([])
   const [panelOpen, setPanelOpen] = useState(false)
+  const [appMode, setAppMode] = useState('explorer') // 'explorer' or 'quiz'
 
   function handleSelectCountry(nameOrCode) {
     const resolved = MAP_NAME_FIXES[nameOrCode] || nameOrCode
@@ -98,7 +99,29 @@ function App() {
             USA
           </button>
         </div>
-        {mapMode === 'world' && (
+        <div className="flex bg-gray-800 rounded-lg p-1">
+          <button
+            onClick={() => setAppMode('explorer')}
+            className={`px-3 py-1 rounded-md text-sm font-medium transition-colors ${
+              appMode === 'explorer'
+                ? 'bg-amber-500 text-gray-900'
+                : 'text-gray-400 hover:text-white'
+            }`}
+          >
+            Explorer
+          </button>
+          <button
+            onClick={() => setAppMode('quiz')}
+            className={`px-3 py-1 rounded-md text-sm font-medium transition-colors ${
+              appMode === 'quiz'
+                ? 'bg-amber-500 text-gray-900'
+                : 'text-gray-400 hover:text-white'
+            }`}
+          >
+            Quiz
+          </button>
+        </div>
+        {appMode === 'explorer' && mapMode === 'world' && (
           <div className="w-full md:w-auto md:flex-1">
             <SearchBar onSelect={handleSelectCountry} />
           </div>
@@ -126,12 +149,18 @@ function App() {
             <span className="text-gray-400">{panelOpen ? '▼' : '▲'}</span>
           </button>
           <div className={`${panelOpen ? 'max-h-[50vh]' : 'max-h-0'} md:max-h-none overflow-y-auto transition-all duration-300`}>
-            <InfoPanel
-              selected={selected}
-              recentlyViewed={recentlyViewed}
-              onSelect={mapMode === 'world' ? handleSelectCountry : handleSelectState}
-              mapMode={mapMode}
-            />
+            {appMode === 'explorer' ? (
+              <InfoPanel
+                selected={selected}
+                recentlyViewed={recentlyViewed}
+                onSelect={mapMode === 'world' ? handleSelectCountry : handleSelectState}
+                mapMode={mapMode}
+              />
+            ) : (
+              <div className="p-6 text-gray-400 text-center">
+                <p>Quiz Mode coming soon...</p>
+              </div>
+            )}
           </div>
         </aside>
       </div>
