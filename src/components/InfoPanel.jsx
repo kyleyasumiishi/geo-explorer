@@ -1,3 +1,5 @@
+import summaries from '../data/summaries.json'
+
 export default function InfoPanel({ selected, recentlyViewed, onSelect, mapMode }) {
   const isState = mapMode === 'usa'
 
@@ -38,6 +40,18 @@ export default function InfoPanel({ selected, recentlyViewed, onSelect, mapMode 
               <dd style={{ color: '#e2e8f0' }}>{selected.population.toLocaleString()}</dd>
             </div>
           </dl>
+          {summaries.countries[selected.cca3] && (
+            <div className="space-y-4 pt-2">
+              {Object.entries(summaries.countries[selected.cca3]).map(([section, text]) => (
+                <div key={section}>
+                  <h3 className="text-sm font-semibold uppercase tracking-wide mb-1" style={{ color: '#6a7f9a' }}>
+                    {section}
+                  </h3>
+                  <p className="text-sm leading-relaxed" style={{ color: '#c0cdd8' }}>{text}</p>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       )}
 
@@ -58,6 +72,18 @@ export default function InfoPanel({ selected, recentlyViewed, onSelect, mapMode 
               <dd style={{ color: '#e2e8f0' }}>{selected.region}</dd>
             </div>
           </dl>
+          {summaries.states[selected.abbreviation] && (
+            <div className="space-y-4 pt-2">
+              {Object.entries(summaries.states[selected.abbreviation]).map(([section, text]) => (
+                <div key={section}>
+                  <h3 className="text-sm font-semibold uppercase tracking-wide mb-1" style={{ color: '#6a7f9a' }}>
+                    {section}
+                  </h3>
+                  <p className="text-sm leading-relaxed" style={{ color: '#c0cdd8' }}>{text}</p>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       )}
 
