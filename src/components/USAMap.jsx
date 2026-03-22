@@ -34,13 +34,13 @@ export default function USAMap({ selected, highlighted, onSelect }) {
                   style={{
                     default: {
                       fill: isSelected ? '#2563eb' : '#e2e8f0',
-                      stroke: isSelected ? '#1d4ed8' : '#ffffff',
+                      stroke: isSelected ? '#1d4ed8' : '#1e293b',
                       strokeWidth: 0.5,
                       outline: 'none',
                     },
                     hover: {
                       fill: isSelected ? '#2563eb' : '#cbd5e1',
-                      stroke: isSelected ? '#1d4ed8' : '#ffffff',
+                      stroke: isSelected ? '#1d4ed8' : '#1e293b',
                       strokeWidth: 0.5,
                       outline: 'none',
                       cursor: 'pointer',
