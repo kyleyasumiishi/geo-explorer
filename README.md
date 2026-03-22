@@ -2,6 +2,8 @@
 
 An interactive geography learning app built with React. Explore countries and US states on a map, test your knowledge with quizzes, and study with structured flashcards.
 
+Link to live app: https://kyleyasumiishi.github.io/geo-explorer/
+
 ## Features
 
 ### Explorer Mode
