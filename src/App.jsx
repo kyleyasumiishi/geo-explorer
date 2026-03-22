@@ -131,7 +131,7 @@ function App() {
         </div>
         <div className="flex rounded-lg p-1" style={{ backgroundColor: '#212d3d' }}>
           <button
-            onClick={() => setAppMode('explorer')}
+            onClick={() => { setAppMode('explorer'); setHighlighted(null) }}
             className="px-3 py-1 rounded-md text-sm font-medium transition-colors"
             style={{
               backgroundColor: appMode === 'explorer' ? '#e11d48' : 'transparent',
@@ -141,7 +141,7 @@ function App() {
             Explorer
           </button>
           <button
-            onClick={() => setAppMode('quiz')}
+            onClick={() => { setAppMode('quiz'); setSelected(null) }}
             className="px-3 py-1 rounded-md text-sm font-medium transition-colors"
             style={{
               backgroundColor: appMode === 'quiz' ? '#e11d48' : 'transparent',
@@ -151,7 +151,7 @@ function App() {
             Quiz
           </button>
           <button
-            onClick={() => setAppMode('learn')}
+            onClick={() => { setAppMode('learn'); setSelected(null); setHighlighted(null) }}
             className="px-3 py-1 rounded-md text-sm font-medium transition-colors"
             style={{
               backgroundColor: appMode === 'learn' ? '#e11d48' : 'transparent',
@@ -186,9 +186,9 @@ function App() {
             className="md:hidden w-full px-4 py-3 flex items-center justify-between text-sm font-medium"
           >
             <span style={{ color: '#e2e8f0' }}>
-              {selected
-                ? selected.name?.common || selected.name
-                : 'No selection'}
+              {appMode === 'explorer'
+                ? (selected ? selected.name?.common || selected.name : 'No selection')
+                : (highlighted ? highlighted.name?.common || highlighted.name : appMode === 'quiz' ? 'Quiz' : 'Learn')}
             </span>
             <span style={{ color: '#6a7f9a' }}>{panelOpen ? '▼' : '▲'}</span>
           </button>
