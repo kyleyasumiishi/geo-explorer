@@ -80,10 +80,10 @@ export default function LearnPanel({ mapMode, onHighlight }) {
   if (phase === 'setup') {
     return (
       <div className="p-6 space-y-5">
-        <h2 className="text-lg font-bold" style={{ color: '#e2e8f0' }}>Learn Mode</h2>
+        <h2 className="text-lg font-bold" style={{ color: '#1e293b' }}>Learn Mode</h2>
 
         <div>
-          <p className="text-sm mb-2" style={{ color: '#6a7f9a' }}>Select a region:</p>
+          <p className="text-sm mb-2" style={{ color: '#64748b' }}>Select a region:</p>
           <div className="flex flex-wrap gap-2">
             {regions.map((r) => (
               <button
@@ -91,8 +91,8 @@ export default function LearnPanel({ mapMode, onHighlight }) {
                 onClick={() => setRegion(r.value)}
                 className="px-3 py-1 rounded-md text-sm font-medium transition-colors"
                 style={{
-                  backgroundColor: region === r.value ? '#e11d48' : '#243040',
-                  color: region === r.value ? '#fff' : '#6a7f9a',
+                  backgroundColor: region === r.value ? '#2563eb' : '#f1f5f9',
+                  color: region === r.value ? '#fff' : '#64748b',
                 }}
               >
                 {r.label}
@@ -102,8 +102,8 @@ export default function LearnPanel({ mapMode, onHighlight }) {
         </div>
 
         <div>
-          <p className="text-sm mb-2" style={{ color: '#6a7f9a' }}>
-            How many? <span style={{ color: '#3a5070' }}>({available} available)</span>
+          <p className="text-sm mb-2" style={{ color: '#64748b' }}>
+            How many? <span style={{ color: '#94a3b8' }}>({available} available)</span>
           </p>
           <div className="flex gap-2 items-center">
             {COUNT_OPTIONS.filter((c) => c <= available).map((c) => (
@@ -112,8 +112,8 @@ export default function LearnPanel({ mapMode, onHighlight }) {
                 onClick={() => setCount(c)}
                 className="px-3 py-1 rounded-md text-sm font-medium transition-colors"
                 style={{
-                  backgroundColor: count === c ? '#e11d48' : '#243040',
-                  color: count === c ? '#fff' : '#6a7f9a',
+                  backgroundColor: count === c ? '#2563eb' : '#f1f5f9',
+                  color: count === c ? '#fff' : '#64748b',
                 }}
               >
                 {c}
@@ -133,9 +133,9 @@ export default function LearnPanel({ mapMode, onHighlight }) {
                 onFocus={() => { if (COUNT_OPTIONS.includes(count)) setCount('') }}
                 className="w-20 px-2 py-1 rounded-md text-sm font-medium focus:outline-none"
                 style={{
-                  backgroundColor: '#243040',
-                  color: '#e2e8f0',
-                  border: `1px solid ${!COUNT_OPTIONS.includes(count) && count !== '' ? '#e11d48' : '#2d3f55'}`,
+                  backgroundColor: '#f1f5f9',
+                  color: '#1e293b',
+                  border: `1px solid ${!COUNT_OPTIONS.includes(count) && count !== '' ? '#2563eb' : '#e2e8f0'}`,
                 }}
               />
             )}
@@ -145,7 +145,7 @@ export default function LearnPanel({ mapMode, onHighlight }) {
         <button
           onClick={handleStart}
           className="w-full px-4 py-2 font-medium rounded-lg transition-colors"
-          style={{ backgroundColor: '#e11d48', color: '#fff' }}
+          style={{ backgroundColor: '#2563eb', color: '#fff' }}
         >
           Start Learning
         </button>
@@ -196,21 +196,21 @@ export default function LearnPanel({ mapMode, onHighlight }) {
           <button
             onClick={handleBackToSetup}
             className="text-sm transition-colors"
-            style={{ color: '#6a7f9a' }}
+            style={{ color: '#64748b' }}
           >
             ← Back
           </button>
-          <span className="text-sm" style={{ color: '#6a7f9a' }}>
+          <span className="text-sm" style={{ color: '#64748b' }}>
             {currentIndex + 1} / {learnSet.length}
           </span>
         </div>
 
         {/* Progress bar */}
-        <div className="w-full rounded-full h-1.5" style={{ backgroundColor: '#243040' }}>
+        <div className="w-full rounded-full h-1.5" style={{ backgroundColor: '#f1f5f9' }}>
           <div
             className="h-1.5 rounded-full transition-all duration-300"
             style={{
-              backgroundColor: '#e11d48',
+              backgroundColor: '#2563eb',
               width: `${((currentIndex + 1) / learnSet.length) * 100}%`,
             }}
           />
@@ -223,25 +223,25 @@ export default function LearnPanel({ mapMode, onHighlight }) {
               alt={`Flag of ${current.name.common}`}
               className="w-full max-w-[180px] rounded shadow"
             />
-            <h2 className="text-xl font-bold" style={{ color: '#e2e8f0' }}>
+            <h2 className="text-xl font-bold" style={{ color: '#1e293b' }}>
               {current.name.common}
             </h2>
             <dl className="space-y-1.5 text-sm">
               <div className="flex gap-2">
-                <dt style={{ color: '#6a7f9a' }}>Capital:</dt>
-                <dd style={{ color: '#e2e8f0' }}>{current.capital?.[0] || 'N/A'}</dd>
+                <dt style={{ color: '#64748b' }}>Capital:</dt>
+                <dd style={{ color: '#1e293b' }}>{current.capital?.[0] || 'N/A'}</dd>
               </div>
               <div className="flex gap-2">
-                <dt style={{ color: '#6a7f9a' }}>Region:</dt>
-                <dd style={{ color: '#e2e8f0' }}>{current.region}</dd>
+                <dt style={{ color: '#64748b' }}>Region:</dt>
+                <dd style={{ color: '#1e293b' }}>{current.region}</dd>
               </div>
               <div className="flex gap-2">
-                <dt style={{ color: '#6a7f9a' }}>Subregion:</dt>
-                <dd style={{ color: '#e2e8f0' }}>{current.subregion || 'N/A'}</dd>
+                <dt style={{ color: '#64748b' }}>Subregion:</dt>
+                <dd style={{ color: '#1e293b' }}>{current.subregion || 'N/A'}</dd>
               </div>
               <div className="flex gap-2">
-                <dt style={{ color: '#6a7f9a' }}>Population:</dt>
-                <dd style={{ color: '#e2e8f0' }}>{current.population.toLocaleString()}</dd>
+                <dt style={{ color: '#64748b' }}>Population:</dt>
+                <dd style={{ color: '#1e293b' }}>{current.population.toLocaleString()}</dd>
               </div>
             </dl>
           </div>
@@ -249,21 +249,21 @@ export default function LearnPanel({ mapMode, onHighlight }) {
 
         {current && !isWorld && (
           <div className="space-y-3">
-            <h2 className="text-xl font-bold" style={{ color: '#e2e8f0' }}>
+            <h2 className="text-xl font-bold" style={{ color: '#1e293b' }}>
               {current.name}
             </h2>
             <dl className="space-y-1.5 text-sm">
               <div className="flex gap-2">
-                <dt style={{ color: '#6a7f9a' }}>Abbreviation:</dt>
-                <dd style={{ color: '#e2e8f0' }}>{current.abbreviation}</dd>
+                <dt style={{ color: '#64748b' }}>Abbreviation:</dt>
+                <dd style={{ color: '#1e293b' }}>{current.abbreviation}</dd>
               </div>
               <div className="flex gap-2">
-                <dt style={{ color: '#6a7f9a' }}>Capital:</dt>
-                <dd style={{ color: '#e2e8f0' }}>{current.capital}</dd>
+                <dt style={{ color: '#64748b' }}>Capital:</dt>
+                <dd style={{ color: '#1e293b' }}>{current.capital}</dd>
               </div>
               <div className="flex gap-2">
-                <dt style={{ color: '#6a7f9a' }}>Region:</dt>
-                <dd style={{ color: '#e2e8f0' }}>{current.region}</dd>
+                <dt style={{ color: '#64748b' }}>Region:</dt>
+                <dd style={{ color: '#1e293b' }}>{current.region}</dd>
               </div>
             </dl>
           </div>
@@ -274,14 +274,14 @@ export default function LearnPanel({ mapMode, onHighlight }) {
             onClick={handleBack}
             disabled={currentIndex === 0}
             className="flex-1 px-4 py-2 font-medium rounded-lg transition-colors text-sm disabled:opacity-30"
-            style={{ backgroundColor: '#243040', color: '#e2e8f0' }}
+            style={{ backgroundColor: '#f1f5f9', color: '#1e293b' }}
           >
             Previous
           </button>
           <button
             onClick={handleNext}
             className="flex-1 px-4 py-2 font-medium rounded-lg transition-colors text-sm"
-            style={{ backgroundColor: '#e11d48', color: '#fff' }}
+            style={{ backgroundColor: '#2563eb', color: '#fff' }}
           >
             {currentIndex === learnSet.length - 1 ? 'Start Quiz' : 'Next'}
           </button>
@@ -325,24 +325,24 @@ export default function LearnPanel({ mapMode, onHighlight }) {
     return (
       <div className="p-6 space-y-4">
         <div className="flex items-center justify-between">
-          <h2 className="text-lg font-bold" style={{ color: '#e2e8f0' }}>Quiz</h2>
-          <span className="text-sm" style={{ color: '#6a7f9a' }}>
+          <h2 className="text-lg font-bold" style={{ color: '#1e293b' }}>Quiz</h2>
+          <span className="text-sm" style={{ color: '#64748b' }}>
             {quizIndex + 1} / {quizOrder.length}
           </span>
         </div>
 
-        <div className="w-full rounded-full h-1.5" style={{ backgroundColor: '#243040' }}>
+        <div className="w-full rounded-full h-1.5" style={{ backgroundColor: '#f1f5f9' }}>
           <div
             className="h-1.5 rounded-full transition-all duration-300"
             style={{
-              backgroundColor: '#e11d48',
+              backgroundColor: '#2563eb',
               width: `${((quizIndex + 1) / quizOrder.length) * 100}%`,
             }}
           />
         </div>
 
         <div>
-          <p className="text-sm mb-1" style={{ color: '#6a7f9a' }}>
+          <p className="text-sm mb-1" style={{ color: '#64748b' }}>
             Name the highlighted {isWorld ? 'country' : 'state'}:
           </p>
           <form onSubmit={handleQuizSubmit}>
@@ -354,9 +354,9 @@ export default function LearnPanel({ mapMode, onHighlight }) {
               placeholder="Your answer..."
               className="w-full px-4 py-2 rounded-lg focus:outline-none disabled:opacity-50"
               style={{
-                backgroundColor: '#243040',
-                color: '#e2e8f0',
-                border: '1px solid #2d3f55',
+                backgroundColor: '#f1f5f9',
+                color: '#1e293b',
+                border: '1px solid #e2e8f0',
               }}
             />
           </form>
@@ -365,14 +365,14 @@ export default function LearnPanel({ mapMode, onHighlight }) {
               <button
                 onClick={handleQuizSubmit}
                 className="flex-1 px-4 py-2 font-medium rounded-lg transition-colors text-sm"
-                style={{ backgroundColor: '#e11d48', color: '#fff' }}
+                style={{ backgroundColor: '#2563eb', color: '#fff' }}
               >
                 Submit
               </button>
               <button
                 onClick={handleQuizSkip}
                 className="flex-1 px-4 py-2 font-medium rounded-lg transition-colors text-sm"
-                style={{ backgroundColor: '#243040', color: '#6a7f9a' }}
+                style={{ backgroundColor: '#f1f5f9', color: '#64748b' }}
               >
                 Skip
               </button>
@@ -381,17 +381,17 @@ export default function LearnPanel({ mapMode, onHighlight }) {
         </div>
 
         {quizResult === 'correct' && (
-          <div className="rounded-lg p-3" style={{ backgroundColor: 'rgba(34, 197, 94, 0.15)', border: '1px solid rgba(34, 197, 94, 0.3)' }}>
-            <p className="font-medium" style={{ color: '#4ade80' }}>Correct!</p>
+          <div className="rounded-lg p-3" style={{ backgroundColor: 'rgba(34, 197, 94, 0.1)', border: '1px solid rgba(34, 197, 94, 0.3)' }}>
+            <p className="font-medium" style={{ color: '#16a34a' }}>Correct!</p>
           </div>
         )}
 
         {quizResult === 'wrong' && (
-          <div className="rounded-lg p-3 space-y-2" style={{ backgroundColor: 'rgba(239, 68, 68, 0.15)', border: '1px solid rgba(239, 68, 68, 0.3)' }}>
-            <p className="font-medium" style={{ color: '#f87171' }}>
-              The answer was: <span style={{ color: '#e2e8f0' }}>{quizTargetName}</span>
+          <div className="rounded-lg p-3 space-y-2" style={{ backgroundColor: 'rgba(239, 68, 68, 0.1)', border: '1px solid rgba(239, 68, 68, 0.3)' }}>
+            <p className="font-medium" style={{ color: '#dc2626' }}>
+              The answer was: <span style={{ color: '#1e293b' }}>{quizTargetName}</span>
             </p>
-            <div className="text-sm" style={{ color: '#6a7f9a' }}>
+            <div className="text-sm" style={{ color: '#64748b' }}>
               <p>Capital: {quizTargetCapital || 'N/A'}</p>
             </div>
           </div>
@@ -401,7 +401,7 @@ export default function LearnPanel({ mapMode, onHighlight }) {
           <button
             onClick={handleQuizNext}
             className="w-full px-4 py-2 font-medium rounded-lg transition-colors"
-            style={{ backgroundColor: '#e11d48', color: '#fff' }}
+            style={{ backgroundColor: '#2563eb', color: '#fff' }}
           >
             {quizIndex === quizOrder.length - 1 ? 'See Results' : 'Next'}
           </button>
@@ -424,18 +424,18 @@ export default function LearnPanel({ mapMode, onHighlight }) {
 
   return (
     <div className="p-6 space-y-5">
-      <h2 className="text-lg font-bold" style={{ color: '#e2e8f0' }}>Results</h2>
+      <h2 className="text-lg font-bold" style={{ color: '#1e293b' }}>Results</h2>
 
       <div className="text-center py-4">
-        <p className="text-3xl font-bold" style={{ color: '#e11d48' }}>
+        <p className="text-3xl font-bold" style={{ color: '#2563eb' }}>
           {correctCount} / {results.length}
         </p>
-        <p className="text-sm mt-1" style={{ color: '#6a7f9a' }}>correct</p>
+        <p className="text-sm mt-1" style={{ color: '#64748b' }}>correct</p>
       </div>
 
       {missed.length > 0 && (
         <div>
-          <h3 className="text-sm font-semibold uppercase tracking-wide mb-2" style={{ color: '#6a7f9a' }}>
+          <h3 className="text-sm font-semibold uppercase tracking-wide mb-2" style={{ color: '#64748b' }}>
             Missed
           </h3>
           <ul className="space-y-1">
@@ -443,7 +443,7 @@ export default function LearnPanel({ mapMode, onHighlight }) {
               <li
                 key={r.item.cca3 || r.item.abbreviation}
                 className="flex items-center gap-2 px-3 py-2 rounded text-sm"
-                style={{ backgroundColor: '#243040', color: '#e2e8f0' }}
+                style={{ backgroundColor: '#f1f5f9', color: '#1e293b' }}
               >
                 {r.item.flags && (
                   <img src={r.item.flags.svg} alt="" className="w-5 h-3 object-cover rounded-sm" />
@@ -460,7 +460,7 @@ export default function LearnPanel({ mapMode, onHighlight }) {
           <button
             onClick={handleRetryMissed}
             className="w-full px-4 py-2 font-medium rounded-lg transition-colors"
-            style={{ backgroundColor: '#e11d48', color: '#fff' }}
+            style={{ backgroundColor: '#2563eb', color: '#fff' }}
           >
             Retry Missed ({missed.length})
           </button>
@@ -468,7 +468,7 @@ export default function LearnPanel({ mapMode, onHighlight }) {
         <button
           onClick={handleBackToSetup}
           className="w-full px-4 py-2 font-medium rounded-lg transition-colors"
-          style={{ backgroundColor: '#243040', color: '#e2e8f0' }}
+          style={{ backgroundColor: '#f1f5f9', color: '#1e293b' }}
         >
           New Session
         </button>

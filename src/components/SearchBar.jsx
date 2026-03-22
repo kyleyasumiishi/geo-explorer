@@ -86,15 +86,15 @@ export default function SearchBar({ onSelect, mapMode }) {
         placeholder={placeholder}
         className="w-full px-4 py-2 rounded-lg focus:outline-none"
         style={{
-          backgroundColor: '#243040',
-          color: '#e2e8f0',
-          border: '1px solid #2d3f55',
+          backgroundColor: '#f1f5f9',
+          color: '#1e293b',
+          border: '1px solid #e2e8f0',
         }}
-        onFocusCapture={(e) => e.target.style.borderColor = '#e11d48'}
-        onBlurCapture={(e) => e.target.style.borderColor = '#2d3f55'}
+        onFocusCapture={(e) => e.target.style.borderColor = '#2563eb'}
+        onBlurCapture={(e) => e.target.style.borderColor = '#e2e8f0'}
       />
       {isOpen && (
-        <ul className="absolute z-50 w-full mt-1 rounded-lg overflow-hidden shadow-lg" style={{ backgroundColor: '#212d3d', border: '1px solid #2d3f55' }}>
+        <ul className="absolute z-50 w-full mt-1 rounded-lg overflow-hidden shadow-lg" style={{ backgroundColor: '#ffffff', border: '1px solid #e2e8f0' }}>
           {results.map((item, i) => (
             <li
               key={item.cca3 || item.abbreviation}
@@ -102,8 +102,8 @@ export default function SearchBar({ onSelect, mapMode }) {
               onMouseEnter={() => setHighlightIndex(i)}
               className="px-4 py-2 cursor-pointer flex items-center gap-3"
               style={{
-                backgroundColor: i === highlightIndex ? '#243040' : 'transparent',
-                color: '#e2e8f0',
+                backgroundColor: i === highlightIndex ? '#f1f5f9' : 'transparent',
+                color: '#1e293b',
               }}
             >
               {item.flags && (
@@ -115,7 +115,7 @@ export default function SearchBar({ onSelect, mapMode }) {
               )}
               <span>{item.name?.common || item.name}</span>
               {item.capital && mapMode === 'usa' && (
-                <span style={{ color: '#6a7f9a' }} className="text-sm">— {item.capital}</span>
+                <span style={{ color: '#64748b' }} className="text-sm">— {item.capital}</span>
               )}
             </li>
           ))}

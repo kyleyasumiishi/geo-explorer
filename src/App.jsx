@@ -98,26 +98,26 @@ function App() {
   }
 
   return (
-    <div className="h-screen flex flex-col" style={{ backgroundColor: '#1c2433', color: '#e2e8f0' }}>
+    <div className="h-screen flex flex-col" style={{ backgroundColor: '#f8fafc', color: '#1e293b' }}>
       <header className="p-3 md:p-4 flex flex-col md:flex-row items-center gap-3 md:gap-4 shrink-0">
         <h1
           className="text-2xl md:text-3xl font-bold cursor-pointer transition-colors"
-          style={{ color: '#e2e8f0' }}
-          onMouseEnter={(e) => e.target.style.color = '#e11d48'}
-          onMouseLeave={(e) => e.target.style.color = '#e2e8f0'}
+          style={{ color: '#1e293b' }}
+          onMouseEnter={(e) => e.target.style.color = '#2563eb'}
+          onMouseLeave={(e) => e.target.style.color = '#1e293b'}
           onClick={() => setSelected(null)}
           title="Reset map view"
         >
           GeoExplorer
         </h1>
         <div className="flex md:contents gap-3">
-        <div className="flex rounded-lg p-1" style={{ backgroundColor: '#212d3d' }}>
+        <div className="flex rounded-lg p-1" style={{ backgroundColor: '#f1f5f9' }}>
           <button
             onClick={() => handleToggleMode('world')}
             className="px-3 py-1 rounded-md text-sm font-medium transition-colors"
             style={{
-              backgroundColor: mapMode === 'world' ? '#e11d48' : 'transparent',
-              color: mapMode === 'world' ? '#fff' : '#6a7f9a',
+              backgroundColor: mapMode === 'world' ? '#2563eb' : 'transparent',
+              color: mapMode === 'world' ? '#fff' : '#64748b',
             }}
           >
             World
@@ -126,20 +126,20 @@ function App() {
             onClick={() => handleToggleMode('usa')}
             className="px-3 py-1 rounded-md text-sm font-medium transition-colors"
             style={{
-              backgroundColor: mapMode === 'usa' ? '#e11d48' : 'transparent',
-              color: mapMode === 'usa' ? '#fff' : '#6a7f9a',
+              backgroundColor: mapMode === 'usa' ? '#2563eb' : 'transparent',
+              color: mapMode === 'usa' ? '#fff' : '#64748b',
             }}
           >
             USA
           </button>
         </div>
-        <div className="flex rounded-lg p-1" style={{ backgroundColor: '#212d3d' }}>
+        <div className="flex rounded-lg p-1" style={{ backgroundColor: '#f1f5f9' }}>
           <button
             onClick={() => { setAppMode('explorer'); setHighlighted(null) }}
             className="px-3 py-1 rounded-md text-sm font-medium transition-colors"
             style={{
-              backgroundColor: appMode === 'explorer' ? '#e11d48' : 'transparent',
-              color: appMode === 'explorer' ? '#fff' : '#6a7f9a',
+              backgroundColor: appMode === 'explorer' ? '#2563eb' : 'transparent',
+              color: appMode === 'explorer' ? '#fff' : '#64748b',
             }}
           >
             Explorer
@@ -148,8 +148,8 @@ function App() {
             onClick={() => { setAppMode('quiz'); setSelected(null) }}
             className="px-3 py-1 rounded-md text-sm font-medium transition-colors"
             style={{
-              backgroundColor: appMode === 'quiz' ? '#e11d48' : 'transparent',
-              color: appMode === 'quiz' ? '#fff' : '#6a7f9a',
+              backgroundColor: appMode === 'quiz' ? '#2563eb' : 'transparent',
+              color: appMode === 'quiz' ? '#fff' : '#64748b',
             }}
           >
             Quiz
@@ -158,8 +158,8 @@ function App() {
             onClick={() => { setAppMode('learn'); setSelected(null); setHighlighted(null) }}
             className="px-3 py-1 rounded-md text-sm font-medium transition-colors"
             style={{
-              backgroundColor: appMode === 'learn' ? '#e11d48' : 'transparent',
-              color: appMode === 'learn' ? '#fff' : '#6a7f9a',
+              backgroundColor: appMode === 'learn' ? '#2563eb' : 'transparent',
+              color: appMode === 'learn' ? '#fff' : '#64748b',
             }}
           >
             Learn
@@ -183,18 +183,18 @@ function App() {
             <USAMap selected={appMode === 'explorer' ? selected : null} highlighted={appMode !== 'explorer' ? highlighted : null} onSelect={handleSelectState} />
           )}
         </main>
-        <aside className="w-full md:w-80 shrink-0 md:max-h-none md:overflow-y-auto" style={{ backgroundColor: '#212d3d', borderColor: '#2d3f55', borderLeftWidth: '1px', borderTopWidth: '1px' }}>
+        <aside className="w-full md:w-80 shrink-0 md:max-h-none md:overflow-y-auto" style={{ backgroundColor: '#ffffff', borderColor: '#e2e8f0', borderLeftWidth: '1px', borderTopWidth: '1px' }}>
           {/* Mobile: collapsible bar */}
           <button
             onClick={() => setPanelOpen(!panelOpen)}
             className="md:hidden w-full px-4 py-3 flex items-center justify-between text-sm font-medium"
           >
-            <span style={{ color: '#e2e8f0' }}>
+            <span style={{ color: '#1e293b' }}>
               {appMode === 'explorer'
                 ? (selected ? selected.name?.common || selected.name : 'No selection')
                 : (highlighted ? highlighted.name?.common || highlighted.name : appMode === 'quiz' ? 'Quiz' : 'Learn')}
             </span>
-            <span style={{ color: '#6a7f9a' }}>{panelOpen ? '▼' : '▲'}</span>
+            <span style={{ color: '#64748b' }}>{panelOpen ? '▼' : '▲'}</span>
           </button>
           <div className={`${panelOpen ? 'max-h-[50vh]' : 'max-h-0'} md:max-h-none overflow-y-auto transition-all duration-300`}>
             {appMode === 'explorer' && (

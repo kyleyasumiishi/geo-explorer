@@ -33,21 +33,21 @@ export default function USAMap({ selected, highlighted, onSelect }) {
                   onMouseLeave={() => setHovered(null)}
                   style={{
                     default: {
-                      fill: isSelected ? '#e11d48' : '#243040',
-                      stroke: isSelected ? '#be123c' : '#2d3f55',
+                      fill: isSelected ? '#2563eb' : '#e2e8f0',
+                      stroke: isSelected ? '#1d4ed8' : '#ffffff',
                       strokeWidth: 0.5,
                       outline: 'none',
                     },
                     hover: {
-                      fill: isSelected ? '#e11d48' : '#2d3f55',
-                      stroke: isSelected ? '#be123c' : '#2d3f55',
+                      fill: isSelected ? '#2563eb' : '#cbd5e1',
+                      stroke: isSelected ? '#1d4ed8' : '#ffffff',
                       strokeWidth: 0.5,
                       outline: 'none',
                       cursor: 'pointer',
                     },
                     pressed: {
-                      fill: '#e11d48',
-                      stroke: '#be123c',
+                      fill: '#2563eb',
+                      stroke: '#1d4ed8',
                       strokeWidth: 0.5,
                       outline: 'none',
                     },

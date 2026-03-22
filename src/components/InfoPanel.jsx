@@ -5,7 +5,7 @@ export default function InfoPanel({ selected, recentlyViewed, onSelect, mapMode 
 
   if (!selected && recentlyViewed.length === 0) {
     return (
-      <div className="p-6 text-center" style={{ color: '#6a7f9a' }}>
+      <div className="p-6 text-center" style={{ color: '#64748b' }}>
         <p>Click {isState ? 'a state' : 'a country'} on the map or use the search bar to explore.</p>
       </div>
     )
@@ -20,34 +20,34 @@ export default function InfoPanel({ selected, recentlyViewed, onSelect, mapMode 
             alt={`Flag of ${selected.name.common}`}
             className="w-full max-w-[200px] rounded shadow"
           />
-          <h2 className="text-2xl font-bold" style={{ color: '#e2e8f0' }}>{selected.name.common}</h2>
-          <p className="text-sm" style={{ color: '#6a7f9a' }}>{selected.name.official}</p>
+          <h2 className="text-2xl font-bold" style={{ color: '#1e293b' }}>{selected.name.common}</h2>
+          <p className="text-sm" style={{ color: '#64748b' }}>{selected.name.official}</p>
           <dl className="space-y-2 text-sm">
             <div className="flex gap-2">
-              <dt style={{ color: '#6a7f9a' }}>Capital:</dt>
-              <dd style={{ color: '#e2e8f0' }}>{selected.capital?.[0] || 'N/A'}</dd>
+              <dt style={{ color: '#64748b' }}>Capital:</dt>
+              <dd style={{ color: '#1e293b' }}>{selected.capital?.[0] || 'N/A'}</dd>
             </div>
             <div className="flex gap-2">
-              <dt style={{ color: '#6a7f9a' }}>Region:</dt>
-              <dd style={{ color: '#e2e8f0' }}>{selected.region}</dd>
+              <dt style={{ color: '#64748b' }}>Region:</dt>
+              <dd style={{ color: '#1e293b' }}>{selected.region}</dd>
             </div>
             <div className="flex gap-2">
-              <dt style={{ color: '#6a7f9a' }}>Subregion:</dt>
-              <dd style={{ color: '#e2e8f0' }}>{selected.subregion || 'N/A'}</dd>
+              <dt style={{ color: '#64748b' }}>Subregion:</dt>
+              <dd style={{ color: '#1e293b' }}>{selected.subregion || 'N/A'}</dd>
             </div>
             <div className="flex gap-2">
-              <dt style={{ color: '#6a7f9a' }}>Population:</dt>
-              <dd style={{ color: '#e2e8f0' }}>{selected.population.toLocaleString()}</dd>
+              <dt style={{ color: '#64748b' }}>Population:</dt>
+              <dd style={{ color: '#1e293b' }}>{selected.population.toLocaleString()}</dd>
             </div>
           </dl>
           {summaries.countries[selected.cca3] && (
             <div className="space-y-4 pt-2">
               {Object.entries(summaries.countries[selected.cca3]).map(([section, text]) => (
                 <div key={section}>
-                  <h3 className="text-sm font-semibold uppercase tracking-wide mb-1" style={{ color: '#6a7f9a' }}>
+                  <h3 className="text-sm font-semibold uppercase tracking-wide mb-1" style={{ color: '#64748b' }}>
                     {section}
                   </h3>
-                  <p className="text-sm leading-relaxed" style={{ color: '#c0cdd8' }}>{text}</p>
+                  <p className="text-sm leading-relaxed" style={{ color: '#475569' }}>{text}</p>
                 </div>
               ))}
             </div>
@@ -57,29 +57,29 @@ export default function InfoPanel({ selected, recentlyViewed, onSelect, mapMode 
 
       {selected && isState && (
         <div className="space-y-4">
-          <h2 className="text-2xl font-bold" style={{ color: '#e2e8f0' }}>{selected.name}</h2>
+          <h2 className="text-2xl font-bold" style={{ color: '#1e293b' }}>{selected.name}</h2>
           <dl className="space-y-2 text-sm">
             <div className="flex gap-2">
-              <dt style={{ color: '#6a7f9a' }}>Abbreviation:</dt>
-              <dd style={{ color: '#e2e8f0' }}>{selected.abbreviation}</dd>
+              <dt style={{ color: '#64748b' }}>Abbreviation:</dt>
+              <dd style={{ color: '#1e293b' }}>{selected.abbreviation}</dd>
             </div>
             <div className="flex gap-2">
-              <dt style={{ color: '#6a7f9a' }}>Capital:</dt>
-              <dd style={{ color: '#e2e8f0' }}>{selected.capital}</dd>
+              <dt style={{ color: '#64748b' }}>Capital:</dt>
+              <dd style={{ color: '#1e293b' }}>{selected.capital}</dd>
             </div>
             <div className="flex gap-2">
-              <dt style={{ color: '#6a7f9a' }}>Region:</dt>
-              <dd style={{ color: '#e2e8f0' }}>{selected.region}</dd>
+              <dt style={{ color: '#64748b' }}>Region:</dt>
+              <dd style={{ color: '#1e293b' }}>{selected.region}</dd>
             </div>
           </dl>
           {summaries.states[selected.abbreviation] && (
             <div className="space-y-4 pt-2">
               {Object.entries(summaries.states[selected.abbreviation]).map(([section, text]) => (
                 <div key={section}>
-                  <h3 className="text-sm font-semibold uppercase tracking-wide mb-1" style={{ color: '#6a7f9a' }}>
+                  <h3 className="text-sm font-semibold uppercase tracking-wide mb-1" style={{ color: '#64748b' }}>
                     {section}
                   </h3>
-                  <p className="text-sm leading-relaxed" style={{ color: '#c0cdd8' }}>{text}</p>
+                  <p className="text-sm leading-relaxed" style={{ color: '#475569' }}>{text}</p>
                 </div>
               ))}
             </div>
@@ -89,7 +89,7 @@ export default function InfoPanel({ selected, recentlyViewed, onSelect, mapMode 
 
       {recentlyViewed.length > 0 && (
         <div>
-          <h3 className="text-sm font-semibold uppercase tracking-wide mb-2" style={{ color: '#6a7f9a' }}>
+          <h3 className="text-sm font-semibold uppercase tracking-wide mb-2" style={{ color: '#64748b' }}>
             Recently Viewed
           </h3>
           <ul className="space-y-1">
@@ -98,8 +98,8 @@ export default function InfoPanel({ selected, recentlyViewed, onSelect, mapMode 
                 key={item.cca3 || item.abbreviation}
                 onClick={() => onSelect(item.cca3 || item.name)}
                 className="flex items-center gap-2 px-3 py-2 rounded cursor-pointer text-sm transition-colors"
-                style={{ color: '#e2e8f0' }}
-                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#243040'}
+                style={{ color: '#1e293b' }}
+                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#f1f5f9'}
                 onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
               >
                 {item.flags && (
