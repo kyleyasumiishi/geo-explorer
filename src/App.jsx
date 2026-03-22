@@ -94,7 +94,7 @@ function App() {
 
   return (
     <div className="h-screen flex flex-col" style={{ backgroundColor: '#1c2433', color: '#e2e8f0' }}>
-      <header className="p-3 md:p-4 flex flex-wrap items-center gap-3 md:gap-4 shrink-0">
+      <header className="p-3 md:p-4 flex flex-col md:flex-row items-center gap-3 md:gap-4 shrink-0">
         <h1
           className="text-2xl md:text-3xl font-bold cursor-pointer transition-colors"
           style={{ color: '#e2e8f0' }}
@@ -105,6 +105,7 @@ function App() {
         >
           GeoExplorer
         </h1>
+        <div className="flex md:contents gap-3">
         <div className="flex rounded-lg p-1" style={{ backgroundColor: '#212d3d' }}>
           <button
             onClick={() => handleToggleMode('world')}
@@ -148,6 +149,7 @@ function App() {
           >
             Quiz
           </button>
+        </div>
         </div>
         {appMode === 'explorer' && mapMode === 'world' && (
           <div className="w-full md:w-auto md:flex-1">
