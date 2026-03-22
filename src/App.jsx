@@ -22,7 +22,13 @@ function App() {
   return (
     <div className="h-screen bg-gray-900 text-white flex flex-col">
       <header className="p-4 flex items-center gap-4 shrink-0">
-        <h1 className="text-3xl font-bold">GeoExplorer</h1>
+        <h1
+          className="text-3xl font-bold cursor-pointer hover:text-amber-400 transition-colors"
+          onClick={() => setSelected(null)}
+          title="Reset map view"
+        >
+          GeoExplorer
+        </h1>
         <SearchBar onSelect={handleSelect} />
       </header>
       <div className="flex flex-1 min-h-0">

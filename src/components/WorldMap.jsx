@@ -8,7 +8,12 @@ import {
 
 const GEO_URL = 'https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json'
 
+const DEFAULT_CENTER = [0, 30]
+const DEFAULT_ZOOM = 1
+
 export default function WorldMap({ selected, onSelect }) {
+  const center = selected ? [selected.latlng[1], selected.latlng[0]] : DEFAULT_CENTER
+  const zoom = selected ? 4 : DEFAULT_ZOOM
   const [hovered, setHovered] = useState(null)
 
   return (
@@ -17,7 +22,7 @@ export default function WorldMap({ selected, onSelect }) {
       projectionConfig={{ scale: 130, center: [0, 30] }}
       className="w-full h-full"
     >
-      <ZoomableGroup>
+      <ZoomableGroup center={center} zoom={zoom}>
         <Geographies geography={GEO_URL}>
           {({ geographies }) =>
             geographies.map((geo) => {
