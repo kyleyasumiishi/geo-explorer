@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import WorldMap from './components/WorldMap'
+import SearchBar from './components/SearchBar'
 import countries from './data/countries.json'
 
 function App() {
@@ -12,11 +13,12 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gray-900 text-white">
-      <header className="p-4 text-center">
+      <header className="p-4 flex items-center justify-between gap-4">
         <h1 className="text-3xl font-bold">GeoExplorer</h1>
+        <SearchBar onSelect={handleSelect} />
         {selected && (
-          <p className="mt-2 text-lg text-amber-400">
-            {selected.name.common} — Capital: {selected.capital?.[0] || 'N/A'}
+          <p className="text-lg text-amber-400 whitespace-nowrap">
+            {selected.name.common} — {selected.capital?.[0] || 'N/A'}
           </p>
         )}
       </header>
