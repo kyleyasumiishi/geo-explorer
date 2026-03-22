@@ -158,9 +158,9 @@ function App() {
       <div className="flex flex-col md:flex-row flex-1 min-h-0">
         <main className="flex-1 min-h-[40vh] md:min-h-0">
           {mapMode === 'world' ? (
-            <WorldMap selected={selected} highlighted={appMode === 'quiz' ? highlighted : null} onSelect={handleSelectCountry} />
+            <WorldMap selected={appMode === 'explorer' ? selected : null} highlighted={appMode === 'quiz' ? highlighted : null} onSelect={handleSelectCountry} />
           ) : (
-            <USAMap selected={selected} highlighted={appMode === 'quiz' ? highlighted : null} onSelect={handleSelectState} />
+            <USAMap selected={appMode === 'explorer' ? selected : null} highlighted={appMode === 'quiz' ? highlighted : null} onSelect={handleSelectState} />
           )}
         </main>
         <aside className="w-full md:w-80 shrink-0 md:max-h-none md:overflow-y-auto" style={{ backgroundColor: '#212d3d', borderColor: '#2d3f55', borderLeftWidth: '1px', borderTopWidth: '1px' }}>
@@ -169,7 +169,7 @@ function App() {
             onClick={() => setPanelOpen(!panelOpen)}
             className="md:hidden w-full px-4 py-3 flex items-center justify-between text-sm font-medium"
           >
-            <span style={{ color: '#e11d48' }}>
+            <span style={{ color: '#e2e8f0' }}>
               {selected
                 ? selected.name?.common || selected.name
                 : 'No selection'}
