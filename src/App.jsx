@@ -84,55 +84,58 @@ function App() {
   }
 
   return (
-    <div className="h-screen bg-gray-900 text-white flex flex-col">
+    <div className="h-screen flex flex-col" style={{ backgroundColor: '#1c2433', color: '#e2e8f0' }}>
       <header className="p-3 md:p-4 flex flex-wrap items-center gap-3 md:gap-4 shrink-0">
         <h1
-          className="text-2xl md:text-3xl font-bold cursor-pointer hover:text-amber-400 transition-colors"
+          className="text-2xl md:text-3xl font-bold cursor-pointer transition-colors"
+          style={{ color: '#e2e8f0' }}
+          onMouseEnter={(e) => e.target.style.color = '#e11d48'}
+          onMouseLeave={(e) => e.target.style.color = '#e2e8f0'}
           onClick={() => setSelected(null)}
           title="Reset map view"
         >
           GeoExplorer
         </h1>
-        <div className="flex bg-gray-800 rounded-lg p-1">
+        <div className="flex rounded-lg p-1" style={{ backgroundColor: '#212d3d' }}>
           <button
             onClick={() => handleToggleMode('world')}
-            className={`px-3 py-1 rounded-md text-sm font-medium transition-colors ${
-              mapMode === 'world'
-                ? 'bg-amber-500 text-gray-900'
-                : 'text-gray-400 hover:text-white'
-            }`}
+            className="px-3 py-1 rounded-md text-sm font-medium transition-colors"
+            style={{
+              backgroundColor: mapMode === 'world' ? '#e11d48' : 'transparent',
+              color: mapMode === 'world' ? '#fff' : '#6a7f9a',
+            }}
           >
             World
           </button>
           <button
             onClick={() => handleToggleMode('usa')}
-            className={`px-3 py-1 rounded-md text-sm font-medium transition-colors ${
-              mapMode === 'usa'
-                ? 'bg-amber-500 text-gray-900'
-                : 'text-gray-400 hover:text-white'
-            }`}
+            className="px-3 py-1 rounded-md text-sm font-medium transition-colors"
+            style={{
+              backgroundColor: mapMode === 'usa' ? '#e11d48' : 'transparent',
+              color: mapMode === 'usa' ? '#fff' : '#6a7f9a',
+            }}
           >
             USA
           </button>
         </div>
-        <div className="flex bg-gray-800 rounded-lg p-1">
+        <div className="flex rounded-lg p-1" style={{ backgroundColor: '#212d3d' }}>
           <button
             onClick={() => setAppMode('explorer')}
-            className={`px-3 py-1 rounded-md text-sm font-medium transition-colors ${
-              appMode === 'explorer'
-                ? 'bg-amber-500 text-gray-900'
-                : 'text-gray-400 hover:text-white'
-            }`}
+            className="px-3 py-1 rounded-md text-sm font-medium transition-colors"
+            style={{
+              backgroundColor: appMode === 'explorer' ? '#e11d48' : 'transparent',
+              color: appMode === 'explorer' ? '#fff' : '#6a7f9a',
+            }}
           >
             Explorer
           </button>
           <button
             onClick={() => setAppMode('quiz')}
-            className={`px-3 py-1 rounded-md text-sm font-medium transition-colors ${
-              appMode === 'quiz'
-                ? 'bg-amber-500 text-gray-900'
-                : 'text-gray-400 hover:text-white'
-            }`}
+            className="px-3 py-1 rounded-md text-sm font-medium transition-colors"
+            style={{
+              backgroundColor: appMode === 'quiz' ? '#e11d48' : 'transparent',
+              color: appMode === 'quiz' ? '#fff' : '#6a7f9a',
+            }}
           >
             Quiz
           </button>
@@ -151,18 +154,18 @@ function App() {
             <USAMap selected={selected} highlighted={appMode === 'quiz' ? highlighted : null} onSelect={handleSelectState} />
           )}
         </main>
-        <aside className="w-full md:w-80 bg-gray-800 border-t md:border-t-0 md:border-l border-gray-700 shrink-0 md:max-h-none md:overflow-y-auto">
+        <aside className="w-full md:w-80 shrink-0 md:max-h-none md:overflow-y-auto" style={{ backgroundColor: '#212d3d', borderColor: '#2d3f55', borderLeftWidth: '1px', borderTopWidth: '1px' }}>
           {/* Mobile: collapsible bar */}
           <button
             onClick={() => setPanelOpen(!panelOpen)}
             className="md:hidden w-full px-4 py-3 flex items-center justify-between text-sm font-medium"
           >
-            <span className="text-amber-400">
+            <span style={{ color: '#e11d48' }}>
               {selected
                 ? selected.name?.common || selected.name
                 : 'No selection'}
             </span>
-            <span className="text-gray-400">{panelOpen ? '▼' : '▲'}</span>
+            <span style={{ color: '#6a7f9a' }}>{panelOpen ? '▼' : '▲'}</span>
           </button>
           <div className={`${panelOpen ? 'max-h-[50vh]' : 'max-h-0'} md:max-h-none overflow-y-auto transition-all duration-300`}>
             {appMode === 'explorer' ? (

@@ -25,8 +25,7 @@ export default function WorldMap({ selected, highlighted, onSelect }) {
           {({ geographies }) =>
             geographies.map((geo) => {
               const name = geo.properties.name
-              const isSelected = name && selected?.mapName === name
-              const isHighlighted = name && highlighted?.mapName === name
+              const isSelected = name && (selected?.mapName === name || highlighted?.mapName === name)
 
               return (
                 <Geography
@@ -37,21 +36,21 @@ export default function WorldMap({ selected, highlighted, onSelect }) {
                   onMouseLeave={() => setHovered(null)}
                   style={{
                     default: {
-                      fill: isHighlighted ? '#3b82f6' : isSelected ? '#f59e0b' : '#374151',
-                      stroke: '#1f2937',
+                      fill: isSelected ? '#e11d48' : '#243040',
+                      stroke: isSelected ? '#be123c' : '#2d3f55',
                       strokeWidth: 0.5,
                       outline: 'none',
                     },
                     hover: {
-                      fill: isHighlighted ? '#3b82f6' : isSelected ? '#f59e0b' : '#6b7280',
-                      stroke: '#1f2937',
+                      fill: isSelected ? '#e11d48' : '#2d3f55',
+                      stroke: isSelected ? '#be123c' : '#2d3f55',
                       strokeWidth: 0.5,
                       outline: 'none',
                       cursor: 'pointer',
                     },
                     pressed: {
-                      fill: '#f59e0b',
-                      stroke: '#1f2937',
+                      fill: '#e11d48',
+                      stroke: '#be123c',
                       strokeWidth: 0.5,
                       outline: 'none',
                     },

@@ -3,7 +3,7 @@ export default function InfoPanel({ selected, recentlyViewed, onSelect, mapMode 
 
   if (!selected && recentlyViewed.length === 0) {
     return (
-      <div className="p-6 text-gray-400 text-center">
+      <div className="p-6 text-center" style={{ color: '#6a7f9a' }}>
         <p>Click {isState ? 'a state' : 'a country'} on the map or use the search bar to explore.</p>
       </div>
     )
@@ -18,24 +18,24 @@ export default function InfoPanel({ selected, recentlyViewed, onSelect, mapMode 
             alt={`Flag of ${selected.name.common}`}
             className="w-full max-w-[200px] rounded shadow"
           />
-          <h2 className="text-2xl font-bold text-white">{selected.name.common}</h2>
-          <p className="text-sm text-gray-400">{selected.name.official}</p>
+          <h2 className="text-2xl font-bold" style={{ color: '#e2e8f0' }}>{selected.name.common}</h2>
+          <p className="text-sm" style={{ color: '#6a7f9a' }}>{selected.name.official}</p>
           <dl className="space-y-2 text-sm">
             <div className="flex gap-2">
-              <dt className="text-gray-400">Capital:</dt>
-              <dd className="text-white">{selected.capital?.[0] || 'N/A'}</dd>
+              <dt style={{ color: '#6a7f9a' }}>Capital:</dt>
+              <dd style={{ color: '#e2e8f0' }}>{selected.capital?.[0] || 'N/A'}</dd>
             </div>
             <div className="flex gap-2">
-              <dt className="text-gray-400">Region:</dt>
-              <dd className="text-white">{selected.region}</dd>
+              <dt style={{ color: '#6a7f9a' }}>Region:</dt>
+              <dd style={{ color: '#e2e8f0' }}>{selected.region}</dd>
             </div>
             <div className="flex gap-2">
-              <dt className="text-gray-400">Subregion:</dt>
-              <dd className="text-white">{selected.subregion || 'N/A'}</dd>
+              <dt style={{ color: '#6a7f9a' }}>Subregion:</dt>
+              <dd style={{ color: '#e2e8f0' }}>{selected.subregion || 'N/A'}</dd>
             </div>
             <div className="flex gap-2">
-              <dt className="text-gray-400">Population:</dt>
-              <dd className="text-white">{selected.population.toLocaleString()}</dd>
+              <dt style={{ color: '#6a7f9a' }}>Population:</dt>
+              <dd style={{ color: '#e2e8f0' }}>{selected.population.toLocaleString()}</dd>
             </div>
           </dl>
         </div>
@@ -43,19 +43,19 @@ export default function InfoPanel({ selected, recentlyViewed, onSelect, mapMode 
 
       {selected && isState && (
         <div className="space-y-4">
-          <h2 className="text-2xl font-bold text-white">{selected.name}</h2>
+          <h2 className="text-2xl font-bold" style={{ color: '#e2e8f0' }}>{selected.name}</h2>
           <dl className="space-y-2 text-sm">
             <div className="flex gap-2">
-              <dt className="text-gray-400">Abbreviation:</dt>
-              <dd className="text-white">{selected.abbreviation}</dd>
+              <dt style={{ color: '#6a7f9a' }}>Abbreviation:</dt>
+              <dd style={{ color: '#e2e8f0' }}>{selected.abbreviation}</dd>
             </div>
             <div className="flex gap-2">
-              <dt className="text-gray-400">Capital:</dt>
-              <dd className="text-white">{selected.capital}</dd>
+              <dt style={{ color: '#6a7f9a' }}>Capital:</dt>
+              <dd style={{ color: '#e2e8f0' }}>{selected.capital}</dd>
             </div>
             <div className="flex gap-2">
-              <dt className="text-gray-400">Region:</dt>
-              <dd className="text-white">{selected.region}</dd>
+              <dt style={{ color: '#6a7f9a' }}>Region:</dt>
+              <dd style={{ color: '#e2e8f0' }}>{selected.region}</dd>
             </div>
           </dl>
         </div>
@@ -63,7 +63,7 @@ export default function InfoPanel({ selected, recentlyViewed, onSelect, mapMode 
 
       {recentlyViewed.length > 0 && (
         <div>
-          <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wide mb-2">
+          <h3 className="text-sm font-semibold uppercase tracking-wide mb-2" style={{ color: '#6a7f9a' }}>
             Recently Viewed
           </h3>
           <ul className="space-y-1">
@@ -71,7 +71,10 @@ export default function InfoPanel({ selected, recentlyViewed, onSelect, mapMode 
               <li
                 key={item.cca3 || item.abbreviation}
                 onClick={() => onSelect(item.cca3 || item.name)}
-                className="flex items-center gap-2 px-3 py-2 rounded cursor-pointer hover:bg-gray-700 text-sm"
+                className="flex items-center gap-2 px-3 py-2 rounded cursor-pointer text-sm transition-colors"
+                style={{ color: '#e2e8f0' }}
+                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#243040'}
+                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
               >
                 {item.flags && (
                   <img
@@ -80,7 +83,7 @@ export default function InfoPanel({ selected, recentlyViewed, onSelect, mapMode 
                     className="w-5 h-3 object-cover rounded-sm"
                   />
                 )}
-                <span className="text-white">{item.name?.common || item.name}</span>
+                <span>{item.name?.common || item.name}</span>
               </li>
             ))}
           </ul>

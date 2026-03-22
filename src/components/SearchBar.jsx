@@ -63,18 +63,27 @@ export default function SearchBar({ onSelect }) {
         onKeyDown={handleKeyDown}
         onFocus={() => query.trim() && results.length > 0 && setIsOpen(true)}
         placeholder="Search for a country..."
-        className="w-full px-4 py-2 bg-gray-800 text-white rounded-lg border border-gray-600 focus:border-amber-400 focus:outline-none"
+        className="w-full px-4 py-2 rounded-lg focus:outline-none"
+        style={{
+          backgroundColor: '#243040',
+          color: '#e2e8f0',
+          border: '1px solid #2d3f55',
+        }}
+        onFocusCapture={(e) => e.target.style.borderColor = '#e11d48'}
+        onBlurCapture={(e) => e.target.style.borderColor = '#2d3f55'}
       />
       {isOpen && (
-        <ul className="absolute z-50 w-full mt-1 bg-gray-800 border border-gray-600 rounded-lg overflow-hidden shadow-lg">
+        <ul className="absolute z-50 w-full mt-1 rounded-lg overflow-hidden shadow-lg" style={{ backgroundColor: '#212d3d', border: '1px solid #2d3f55' }}>
           {results.map((country, i) => (
             <li
               key={country.cca3}
               onClick={() => selectCountry(country)}
               onMouseEnter={() => setHighlightIndex(i)}
-              className={`px-4 py-2 cursor-pointer flex items-center gap-3 ${
-                i === highlightIndex ? 'bg-gray-700' : ''
-              }`}
+              className="px-4 py-2 cursor-pointer flex items-center gap-3"
+              style={{
+                backgroundColor: i === highlightIndex ? '#243040' : 'transparent',
+                color: '#e2e8f0',
+              }}
             >
               <img
                 src={country.flags.svg}
