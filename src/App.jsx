@@ -3,6 +3,7 @@ import WorldMap from './components/WorldMap'
 import USAMap from './components/USAMap'
 import SearchBar from './components/SearchBar'
 import InfoPanel from './components/InfoPanel'
+import QuizPanel from './components/QuizPanel'
 import countries from './data/countries.json'
 import usStates from './data/usStates.json'
 
@@ -28,6 +29,7 @@ function App() {
   const [recentlyViewed, setRecentlyViewed] = useState([])
   const [panelOpen, setPanelOpen] = useState(false)
   const [appMode, setAppMode] = useState('explorer') // 'explorer' or 'quiz'
+  const [highlighted, setHighlighted] = useState(null) // quiz target
 
   function handleSelectCountry(nameOrCode) {
     const resolved = MAP_NAME_FIXES[nameOrCode] || nameOrCode
@@ -61,9 +63,23 @@ function App() {
     })
   }
 
+  function handleHighlight(item) {
+    if (mapMode === 'usa') {
+      setHighlighted(item)
+    } else {
+      // Need to find the TopoJSON map name for this country
+      const reverseFixes = Object.fromEntries(
+        Object.entries(MAP_NAME_FIXES).map(([k, v]) => [v, k])
+      )
+      const mapName = reverseFixes[item.name.common] || item.name.common
+      setHighlighted({ ...item, mapName })
+    }
+  }
+
   function handleToggleMode(mode) {
     setMapMode(mode)
     setSelected(null)
+    setHighlighted(null)
     setRecentlyViewed([])
   }
 
@@ -130,9 +146,9 @@ function App() {
       <div className="flex flex-col md:flex-row flex-1 min-h-0">
         <main className="flex-1 min-h-[40vh] md:min-h-0">
           {mapMode === 'world' ? (
-            <WorldMap selected={selected} onSelect={handleSelectCountry} />
+            <WorldMap selected={selected} highlighted={appMode === 'quiz' ? highlighted : null} onSelect={handleSelectCountry} />
           ) : (
-            <USAMap selected={selected} onSelect={handleSelectState} />
+            <USAMap selected={selected} highlighted={appMode === 'quiz' ? highlighted : null} onSelect={handleSelectState} />
           )}
         </main>
         <aside className="w-full md:w-80 bg-gray-800 border-t md:border-t-0 md:border-l border-gray-700 shrink-0 md:max-h-none md:overflow-y-auto">
@@ -157,9 +173,10 @@ function App() {
                 mapMode={mapMode}
               />
             ) : (
-              <div className="p-6 text-gray-400 text-center">
-                <p>Quiz Mode coming soon...</p>
-              </div>
+              <QuizPanel
+                mapMode={mapMode}
+                onHighlight={handleHighlight}
+              />
             )}
           </div>
         </aside>
