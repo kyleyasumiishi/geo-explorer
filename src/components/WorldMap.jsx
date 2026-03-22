@@ -26,16 +26,15 @@ export default function WorldMap({ selected, onSelect }) {
         <Geographies geography={GEO_URL}>
           {({ geographies }) =>
             geographies.map((geo) => {
-              const code = geo.id
-              const isSelected = code && selected?.cca3 === code
-              const isHovered = hovered === code
+              const name = geo.properties.name
+              const isSelected = name && selected?.mapName === name
 
               return (
                 <Geography
                   key={geo.rsmKey}
                   geography={geo}
-                  onClick={() => onSelect(code)}
-                  onMouseEnter={() => setHovered(code)}
+                  onClick={() => onSelect(name)}
+                  onMouseEnter={() => setHovered(name)}
                   onMouseLeave={() => setHovered(null)}
                   style={{
                     default: {

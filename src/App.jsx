@@ -6,19 +6,43 @@ import InfoPanel from './components/InfoPanel'
 import countries from './data/countries.json'
 import usStates from './data/usStates.json'
 
+// Map abbreviated TopoJSON names to countries.json common names
+const MAP_NAME_FIXES = {
+  'W. Sahara': 'Western Sahara',
+  'Dem. Rep. Congo': 'DR Congo',
+  'Dominican Rep.': 'Dominican Republic',
+  'Falkland Is.': 'Falkland Islands',
+  'Fr. S. Antarctic Lands': 'French Southern and Antarctic Lands',
+  'Central African Rep.': 'Central African Republic',
+  'Eq. Guinea': 'Equatorial Guinea',
+  'eSwatini': 'Eswatini',
+  'Solomon Is.': 'Solomon Islands',
+  'Bosnia and Herz.': 'Bosnia and Herzegovina',
+  'Macedonia': 'North Macedonia',
+  'S. Sudan': 'South Sudan',
+}
+
 function App() {
   const [mapMode, setMapMode] = useState('world')
   const [selected, setSelected] = useState(null)
   const [recentlyViewed, setRecentlyViewed] = useState([])
 
-  function handleSelectCountry(code) {
-    const country = countries.find((c) => c.cca3 === code)
+  function handleSelectCountry(nameOrCode) {
+    const resolved = MAP_NAME_FIXES[nameOrCode] || nameOrCode
+    const country = countries.find(
+      (c) =>
+        c.cca3 === resolved ||
+        c.name.common === resolved ||
+        c.name.official === resolved ||
+        c.altSpellings?.some((s) => s === resolved)
+    )
     if (!country) return
 
-    setSelected(country)
+    const entry = { ...country, mapName: nameOrCode }
+    setSelected(entry)
     setRecentlyViewed((prev) => {
       const filtered = prev.filter((c) => c.cca3 !== country.cca3)
-      return [country, ...filtered].slice(0, 5)
+      return [entry, ...filtered].slice(0, 5)
     })
   }
 
