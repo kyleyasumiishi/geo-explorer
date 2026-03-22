@@ -151,9 +151,12 @@ function App() {
           </button>
         </div>
         </div>
-        {appMode === 'explorer' && mapMode === 'world' && (
+        {appMode === 'explorer' && (
           <div className="w-full md:w-auto md:flex-1">
-            <SearchBar onSelect={handleSelectCountry} />
+            <SearchBar
+              onSelect={mapMode === 'world' ? handleSelectCountry : handleSelectState}
+              mapMode={mapMode}
+            />
           </div>
         )}
       </header>

@@ -1,12 +1,37 @@
 import { useState, useRef, useEffect } from 'react'
 import countries from '../data/countries.json'
+import usStates from '../data/usStates.json'
 
-export default function SearchBar({ onSelect }) {
+function filterCountries(query) {
+  const lower = query.toLowerCase()
+  return countries.filter((c) => {
+    if (c.name.common.toLowerCase().includes(lower)) return true
+    if (c.name.official.toLowerCase().includes(lower)) return true
+    return c.altSpellings?.some((s) => s.toLowerCase().includes(lower))
+  })
+}
+
+function filterStates(query) {
+  const lower = query.toLowerCase()
+  return usStates.filter((s) =>
+    s.name.toLowerCase().includes(lower) ||
+    s.abbreviation.toLowerCase().includes(lower) ||
+    s.capital.toLowerCase().includes(lower)
+  )
+}
+
+export default function SearchBar({ onSelect, mapMode }) {
   const [query, setQuery] = useState('')
   const [results, setResults] = useState([])
   const [isOpen, setIsOpen] = useState(false)
   const [highlightIndex, setHighlightIndex] = useState(0)
   const inputRef = useRef(null)
+
+  useEffect(() => {
+    setQuery('')
+    setResults([])
+    setIsOpen(false)
+  }, [mapMode])
 
   useEffect(() => {
     if (!query.trim()) {
@@ -15,20 +40,14 @@ export default function SearchBar({ onSelect }) {
       return
     }
 
-    const lower = query.toLowerCase()
-    const matches = countries.filter((c) => {
-      if (c.name.common.toLowerCase().includes(lower)) return true
-      if (c.name.official.toLowerCase().includes(lower)) return true
-      return c.altSpellings?.some((s) => s.toLowerCase().includes(lower))
-    })
-
+    const matches = mapMode === 'usa' ? filterStates(query) : filterCountries(query)
     setResults(matches.slice(0, 8))
     setHighlightIndex(0)
     setIsOpen(matches.length > 0)
-  }, [query])
+  }, [query, mapMode])
 
-  function selectCountry(country) {
-    onSelect(country.cca3)
+  function selectItem(item) {
+    onSelect(mapMode === 'usa' ? item.name : item.cca3)
     setQuery('')
     setIsOpen(false)
     inputRef.current?.blur()
@@ -46,12 +65,14 @@ export default function SearchBar({ onSelect }) {
     } else if (e.key === 'Enter') {
       e.preventDefault()
       if (results[highlightIndex]) {
-        selectCountry(results[highlightIndex])
+        selectItem(results[highlightIndex])
       }
     } else if (e.key === 'Escape') {
       setIsOpen(false)
     }
   }
+
+  const placeholder = mapMode === 'usa' ? 'Search for a state...' : 'Search for a country...'
 
   return (
     <div className="relative w-full max-w-md">
@@ -62,7 +83,7 @@ export default function SearchBar({ onSelect }) {
         onChange={(e) => setQuery(e.target.value)}
         onKeyDown={handleKeyDown}
         onFocus={() => query.trim() && results.length > 0 && setIsOpen(true)}
-        placeholder="Search for a country..."
+        placeholder={placeholder}
         className="w-full px-4 py-2 rounded-lg focus:outline-none"
         style={{
           backgroundColor: '#243040',
@@ -74,10 +95,10 @@ export default function SearchBar({ onSelect }) {
       />
       {isOpen && (
         <ul className="absolute z-50 w-full mt-1 rounded-lg overflow-hidden shadow-lg" style={{ backgroundColor: '#212d3d', border: '1px solid #2d3f55' }}>
-          {results.map((country, i) => (
+          {results.map((item, i) => (
             <li
-              key={country.cca3}
-              onClick={() => selectCountry(country)}
+              key={item.cca3 || item.abbreviation}
+              onClick={() => selectItem(item)}
               onMouseEnter={() => setHighlightIndex(i)}
               className="px-4 py-2 cursor-pointer flex items-center gap-3"
               style={{
@@ -85,12 +106,17 @@ export default function SearchBar({ onSelect }) {
                 color: '#e2e8f0',
               }}
             >
-              <img
-                src={country.flags.svg}
-                alt=""
-                className="w-6 h-4 object-cover rounded-sm"
-              />
-              <span>{country.name.common}</span>
+              {item.flags && (
+                <img
+                  src={item.flags.svg}
+                  alt=""
+                  className="w-6 h-4 object-cover rounded-sm"
+                />
+              )}
+              <span>{item.name?.common || item.name}</span>
+              {item.capital && mapMode === 'usa' && (
+                <span style={{ color: '#6a7f9a' }} className="text-sm">— {item.capital}</span>
+              )}
             </li>
           ))}
         </ul>
