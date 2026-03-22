@@ -22,7 +22,7 @@ export default function WorldMap({ selected, onSelect }) {
           {({ geographies }) =>
             geographies.map((geo) => {
               const code = geo.id
-              const isSelected = selected?.cca3 === code
+              const isSelected = code && selected?.cca3 === code
               const isHovered = hovered === code
 
               return (
