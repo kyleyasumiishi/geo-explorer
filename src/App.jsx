@@ -4,6 +4,7 @@ import USAMap from './components/USAMap'
 import SearchBar from './components/SearchBar'
 import InfoPanel from './components/InfoPanel'
 import QuizPanel from './components/QuizPanel'
+import LearnPanel from './components/LearnPanel'
 import countries from './data/countries.json'
 import usStates from './data/usStates.json'
 
@@ -149,6 +150,16 @@ function App() {
           >
             Quiz
           </button>
+          <button
+            onClick={() => setAppMode('learn')}
+            className="px-3 py-1 rounded-md text-sm font-medium transition-colors"
+            style={{
+              backgroundColor: appMode === 'learn' ? '#e11d48' : 'transparent',
+              color: appMode === 'learn' ? '#fff' : '#6a7f9a',
+            }}
+          >
+            Learn
+          </button>
         </div>
         </div>
         {appMode === 'explorer' && (
@@ -163,9 +174,9 @@ function App() {
       <div className="flex flex-col md:flex-row flex-1 min-h-0">
         <main className="flex-1 min-h-[40vh] md:min-h-0">
           {mapMode === 'world' ? (
-            <WorldMap selected={appMode === 'explorer' ? selected : null} highlighted={appMode === 'quiz' ? highlighted : null} onSelect={handleSelectCountry} />
+            <WorldMap selected={appMode === 'explorer' ? selected : null} highlighted={appMode !== 'explorer' ? highlighted : null} onSelect={handleSelectCountry} />
           ) : (
-            <USAMap selected={appMode === 'explorer' ? selected : null} highlighted={appMode === 'quiz' ? highlighted : null} onSelect={handleSelectState} />
+            <USAMap selected={appMode === 'explorer' ? selected : null} highlighted={appMode !== 'explorer' ? highlighted : null} onSelect={handleSelectState} />
           )}
         </main>
         <aside className="w-full md:w-80 shrink-0 md:max-h-none md:overflow-y-auto" style={{ backgroundColor: '#212d3d', borderColor: '#2d3f55', borderLeftWidth: '1px', borderTopWidth: '1px' }}>
@@ -182,15 +193,22 @@ function App() {
             <span style={{ color: '#6a7f9a' }}>{panelOpen ? '▼' : '▲'}</span>
           </button>
           <div className={`${panelOpen ? 'max-h-[50vh]' : 'max-h-0'} md:max-h-none overflow-y-auto transition-all duration-300`}>
-            {appMode === 'explorer' ? (
+            {appMode === 'explorer' && (
               <InfoPanel
                 selected={selected}
                 recentlyViewed={recentlyViewed}
                 onSelect={mapMode === 'world' ? handleSelectCountry : handleSelectState}
                 mapMode={mapMode}
               />
-            ) : (
+            )}
+            {appMode === 'quiz' && (
               <QuizPanel
+                mapMode={mapMode}
+                onHighlight={handleHighlight}
+              />
+            )}
+            {appMode === 'learn' && (
+              <LearnPanel
                 mapMode={mapMode}
                 onHighlight={handleHighlight}
               />
