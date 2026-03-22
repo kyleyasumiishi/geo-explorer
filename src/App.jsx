@@ -74,6 +74,10 @@ function App() {
   }
 
   function handleHighlight(item) {
+    if (!item) {
+      setHighlighted(null)
+      return
+    }
     if (mapMode === 'usa') {
       setHighlighted(item)
     } else {

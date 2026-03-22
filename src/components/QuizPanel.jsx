@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import countries from '../data/countries.json'
+import { mappableCountries as countries } from '../data/mapCountries'
 import usStates from '../data/usStates.json'
 
 function getRandomItem(list, exclude) {
